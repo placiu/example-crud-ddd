@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         @vite('resources/js/app.js')
+        @vite('resources/css/app.css')
         @inertiaHead
     </head>
     <body class="antialiased">
