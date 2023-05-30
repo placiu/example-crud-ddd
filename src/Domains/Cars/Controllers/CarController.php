@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Domains\Cars\Controllers;
 
-use App\Http\Requests\CarRequest;
-use App\Models\Car;
-use App\Repositories\CarRepository;
+use Domains\Cars\Requests\CarRequest;
+use Domains\Cars\Models\Car;
+use Persistence\Repositories\CarRepository;
 use Inertia\Inertia;
 
 class CarController extends Controller

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Repositories;
+namespace Persistence\Repositories;
 
-use App\Models\Car;
+use Domains\Cars\Models\Car;
 use Illuminate\Database\Eloquent\Model;
+use Domains\Cars\Repositories\RepositoryInterface;
 
 class CarRepository implements RepositoryInterface
 {
