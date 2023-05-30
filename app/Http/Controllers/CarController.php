@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CarRequest;
 use App\Models\Car;
+use App\Repositories\CarRepository;
 use Inertia\Inertia;
 
 class CarController extends Controller
 {
+    public function __construct(
+        public CarRepository $carRepository
+    ) {}
+
     public function index()
     {
         return Inertia::render('Index', [
@@ -19,21 +24,18 @@ class CarController extends Controller
     {
         $data = $request->validated();
 
-        Car::create($data);
+        $this->carRepository->add($data);
     }
 
     public function update(CarRequest $request, Car $car): void
     {
         $data = $request->validated();
 
-        $car->model = $data['model'];
-        $car->make = $data['make'];
-        $car->licence_number = $data['licence_number'];
-        $car->save();
+        $this->carRepository->update($car, $data);
     }
 
     public function destroy(Car $car): void
     {
-        $car->delete();
+        $this->carRepository->destroy($car);
     }
 }
