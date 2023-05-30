@@ -1,10 +1,15 @@
 <script setup>
-    import { Head } from '@inertiajs/vue3'
     import Layout from './../Components/Layout.vue'
     import Dialog from './../Components/Dialog.vue'
     import FormAdd from './../Components/FormAdd.vue'
     import FormEdit from './../Components/FormEdit.vue'
     import FormDelete from './../Components/FormDelete.vue'
+
+    defineProps({ cars: Object })
+
+    function licenceNumberFormatted(licenceNumber) {
+        return licenceNumber.toUpperCase();
+    }
 </script>
 
 <template>
@@ -48,24 +53,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr v-for="car in cars" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" :key="car.id">
                         <td class="px-6 py-4">
-                            1
+                            {{ car.id }}
                         </td>
                         <td class="px-6 py-4">
-                            DW22233
+                            {{ licenceNumberFormatted(car.licence_number) }}
                         </td>
                         <td class="px-6 py-4">
-                            Mercedes
+                            {{ car.make }}
                         </td>
                         <td class="px-6 py-4">
-                            MP-4
+                            {{ car.model }}
                         </td>
                         <td class="px-6 py-4">
-                            2020-02-02 12:25
+                            {{ car.created_at }}
                         </td>
                         <td class="px-6 py-4">
-                            2020-02-02 12:55
+                            {{ car.updated_at }}
                         </td>
                         <td class="flex gap-2 justify-center px-6 py-4">
                             <Dialog>
@@ -76,7 +81,7 @@
                                     Edit Car
                                 </template>
                                 <template v-slot:dialog-content>
-                                    <FormEdit />
+                                    <FormEdit :car="car"/>
                                 </template>
                             </Dialog>
                             <Dialog>
@@ -87,7 +92,7 @@
                                     Delete Car
                                 </template>
                                 <template v-slot:dialog-content>
-                                    <FormDelete />
+                                    <FormDelete :car="car"/>
                                 </template>
                             </Dialog>
                         </td>
