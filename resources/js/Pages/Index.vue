@@ -10,6 +10,19 @@
     function licenceNumberFormatted(licenceNumber) {
         return licenceNumber.toUpperCase();
     }
+
+    function dateFormatted(date) {
+        const timestamp = Date.parse(date);
+        const dateObject = new Date(timestamp);
+        
+        const year = dateObject.getFullYear();
+        const month = String(dateObject.getMonth() + 1).padStart(2, '0');;
+        const day = String(dateObject.getDay()).padStart(2, '0');
+        const hour = String(dateObject.getHours()).padStart(2, '0');
+        const minutes = String(dateObject.getMinutes()).padStart(2, '0');
+
+        return year + '.' + month + '.' + day + ' ' + hour + ':' + minutes;
+    }
 </script>
 
 <template>
@@ -67,10 +80,10 @@
                             {{ car.model }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ car.created_at }}
+                            {{ dateFormatted(car.created_at) }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ car.updated_at }}
+                            {{ dateFormatted(car.updated_at) }}
                         </td>
                         <td class="flex gap-2 justify-center px-6 py-4">
                             <Dialog>
