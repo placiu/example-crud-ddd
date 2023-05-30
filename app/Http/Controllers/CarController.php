@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CarRequest;
 use App\Models\Car;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CarController extends Controller
@@ -15,24 +15,16 @@ class CarController extends Controller
           ]);
     }
 
-    public function store(Request $request): void
+    public function store(CarRequest $request): void
     {
-        $data = $request->validate([
-            'model' => ['required', 'string', 'min:1', 'max:255'],
-            'make' => ['required', 'string', 'min:1', 'max:255'],
-            'licence_number' => ['required', 'string', 'min:1', 'max:255'],
-        ]);
+        $data = $request->validated();
 
         Car::create($data);
     }
 
-    public function update(Request $request, Car $car): void
+    public function update(CarRequest $request, Car $car): void
     {
-        $data = $request->validate([
-            'model' => ['required', 'string', 'min:1', 'max:255'],
-            'make' => ['required', 'string', 'min:1', 'max:255'],
-            'licence_number' => ['required', 'string', 'min:1', 'max:255'],
-        ]);
+        $data = $request->validated();
 
         $car->model = $data['model'];
         $car->make = $data['make'];
