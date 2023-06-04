@@ -19,7 +19,7 @@ class VehicleRequest extends FormRequest
         return [
             'type' => ['required', new Enum(VehicleTypes::class)],
             'brand' => ['required', new Enum(VehicleBrands::class)],
-            'make' => ['required', 'string', 'min:1', 'max:255'],
+            'model' => ['required', 'string', 'min:1', 'max:255'],
             'licence_number' => ['required', 'string', 'min:1', 'max:255'],
         ];
     }
