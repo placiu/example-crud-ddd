@@ -5,7 +5,11 @@
     import FormEdit from './../Components/FormEdit.vue'
     import FormDelete from './../Components/FormDelete.vue'
 
-    defineProps({ vehicles: Object })
+    const props = defineProps({
+        types: Array,
+        brands: Array,
+        vehicles: Object
+    })
 
     function licenceNumberFormatted(licenceNumber) {
         return licenceNumber.toUpperCase();
@@ -35,7 +39,7 @@
                 Add New Vehicle
             </template>
             <template v-slot:dialog-content>
-                <FormAdd />
+                <FormAdd :brands="props.brands" :types="props.types" />
             </template>
         </Dialog>
         <div class="relative overflow-x-auto">
@@ -74,7 +78,7 @@
                             {{ licenceNumberFormatted(vehicle.licence_number) }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ vehicle.make }}
+                            {{ vehicle.brand.charAt(0).toUpperCase() + vehicle.brand.slice(1) }}
                         </td>
                         <td class="px-6 py-4">
                             {{ vehicle.model }}
@@ -94,7 +98,7 @@
                                     Edit Vehicle
                                 </template>
                                 <template v-slot:dialog-content>
-                                    <FormEdit :vehicle="vehicle"/>
+                                    <FormEdit :brands="brands" :types="types" :vehicle="vehicle"/>
                                 </template>
                             </Dialog>
                             <Dialog>

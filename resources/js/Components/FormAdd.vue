@@ -1,8 +1,14 @@
 <script setup>
     import { useForm } from '@inertiajs/vue3'
 
+    const props = defineProps({
+        types: Array,
+        brands: Array,
+    })
+
     const form = useForm({
-        make: null,
+        type: null,
+        brand: null,
         model: null,
         licence_number: null,
     })
@@ -18,10 +24,21 @@
 <template>
     <form @submit.prevent="add" class="flex flex-col gap-4 mt-6">
         <div class="col-span-full">
-            <label for="make" class="block text-sm font-medium leading-6 text-gray-900">Marka</label>
-            <div class="mt-2">
-              <input v-model="form.make" type="text" name="make" id="make" class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" />
-              <div class="mt-2 text-xs text-red-600" v-if="form.errors.make">{{ form.errors.make }}</div>
+            <label for="type" class="block text-sm font-medium leading-6 text-gray-900">Typ</label>
+            <div class="flex flex-col mt-2">
+                <select id="type" v-model="form.type" name="type" class="flex w-full rounded-md border-0 py-2.5 px-2 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 leading-6">
+                    <option v-for="type in props.types" :value="type">{{ type.charAt(0).toUpperCase() + type.slice(1) }}</option>
+                </select>
+                <div class="mt-2 text-xs text-red-600" v-if="form.errors.type">{{ form.errors.type }}</div>
+            </div>
+        </div>
+        <div class="col-span-full">
+            <label for="brand" class="block text-sm font-medium leading-6 text-gray-900">Marka</label>
+            <div class="flex flex-col mt-2">
+                <select id="brand" v-model="form.brand" name="brand" class="flex w-full rounded-md border-0 py-2.5 px-2 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 leading-6">
+                    <option v-for="brand in props.brands" :value="brand">{{ brand.charAt(0).toUpperCase() + brand.slice(1) }}</option>
+                </select>
+                <div class="mt-2 text-xs text-red-600" v-if="form.errors.brand">{{ form.errors.brand }}</div>
             </div>
         </div>
         <div class="col-span-full">
