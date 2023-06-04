@@ -7,24 +7,40 @@ use Domains\Vehicles\Repositories\VehicleRepositoryInterface;
 
 class VehicleRepository implements VehicleRepositoryInterface
 {
-    public function add(array $data): Vehicle
+    public function index(): array
+    {
+        $vehicles = Vehicle::all();
+
+        return $vehicles->toArray();
+    }
+
+    public function show(int $id): object
+    {
+        return Vehicle::find($id);
+    }
+
+    public function create(array $data): Vehicle
     {
         return Vehicle::create($data);
     }
 
-    public function update(object $model, array $data): object
+    public function update(int $id, array $data): object
     {
-        $model->type = $data['type'];
-        $model->brand = $data['brand'];
-        $model->model = $data['model'];
-        $model->licence_number = $data['licence_number'];
-        $model->save();
+        $vehicle = Vehicle::find($id);
 
-        return $model;
+        $vehicle->type = $data['type'];
+        $vehicle->brand = $data['brand'];
+        $vehicle->model = $data['model'];
+        $vehicle->licence_number = $data['licence_number'];
+        $vehicle->save();
+
+        return $vehicle;
     }
 
-    public function destroy(object $model): void
+    public function destroy(int $id): void
     {
-        $model->delete();
+        $vehicle = Vehicle::find($id);
+
+        $vehicle->delete();
     }
 }
