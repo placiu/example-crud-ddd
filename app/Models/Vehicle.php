@@ -1,6 +1,6 @@
 <?php
 
-namespace Domains\Vehicles\Models;
+namespace App\Models;
 
 use Domains\Vehicles\Dictionaries\VehicleBrands;
 use Domains\Vehicles\Dictionaries\VehicleTypes;

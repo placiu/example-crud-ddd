@@ -1,12 +1,12 @@
 <?php
 
-namespace Domains\Vehicles\Controllers;
+namespace App\Http\Controllers;
 
-use Domains\Vehicles\Models\Vehicle;
-use Domains\Vehicles\Requests\VehicleRequest;
+use App\Http\Requests\VehicleRequest;
+use App\Models\Vehicle;
+use Inertia\Inertia;
 use Inertia\Response;
 use Persistence\Repositories\VehicleRepository;
-use Inertia\Inertia;
 
 class VehicleController extends Controller
 {

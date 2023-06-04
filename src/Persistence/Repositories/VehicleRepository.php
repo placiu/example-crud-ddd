@@ -2,7 +2,7 @@
 
 namespace Persistence\Repositories;
 
-use Domains\Vehicles\Models\Vehicle;
+use App\Models\Vehicle;
 use Domains\Vehicles\Repositories\VehicleRepositoryInterface;
 
 class VehicleRepository implements VehicleRepositoryInterface

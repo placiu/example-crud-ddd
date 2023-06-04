@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Vehicle;
 use Domains\Vehicles\Dictionaries\VehicleBrands;
 use Domains\Vehicles\Dictionaries\VehicleTypes;
-use Domains\Vehicles\Models\Vehicle;
 use Illuminate\Database\Seeder;
 
 class VehicleSeeder extends Seeder
