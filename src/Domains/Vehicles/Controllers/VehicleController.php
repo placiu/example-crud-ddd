@@ -5,13 +5,13 @@ namespace Domains\Vehicles\Controllers;
 use Domains\Vehicles\Models\Vehicle;
 use Domains\Vehicles\Requests\VehicleRequest;
 use Inertia\Response;
-use Persistence\Repositories\CarRepository;
+use Persistence\Repositories\VehicleRepository;
 use Inertia\Inertia;
 
 class VehicleController extends Controller
 {
     public function __construct(
-        public CarRepository $carRepository
+        public VehicleRepository $vehicleRepository,
     ) {}
 
     public function index(): Response
@@ -25,18 +25,18 @@ class VehicleController extends Controller
     {
         $data = $request->validated();
 
-        $this->carRepository->add($data);
+        $this->vehicleRepository->add($data);
     }
 
     public function update(VehicleRequest $request, Vehicle $vehicle): void
     {
         $data = $request->validated();
 
-        $this->carRepository->update($vehicle, $data);
+        $this->vehicleRepository->update($vehicle, $data);
     }
 
     public function destroy(Vehicle $vehicle): void
     {
-        $this->carRepository->destroy($vehicle);
+        $this->vehicleRepository->destroy($vehicle);
     }
 }
