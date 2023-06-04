@@ -3,40 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VehicleRequest;
-use App\Models\Vehicle;
+use Domains\Vehicles\Dictionaries\VehicleBrands;
+use Domains\Vehicles\Dictionaries\VehicleTypes;
+use Domains\Vehicles\Interfaces\VehicleDestroyerInterface;
+use Domains\Vehicles\Interfaces\VehiclesBuilderInterface;
+use Domains\Vehicles\Interfaces\VehiclesWriterInterface;
 use Inertia\Inertia;
 use Inertia\Response;
-use Persistence\Repositories\VehicleRepository;
 
 class VehicleController extends Controller
 {
-    public function __construct(
-        public VehicleRepository $vehicleRepository,
-    ) {}
-
-    public function index(): Response
+    public function index(VehiclesBuilderInterface $builder): Response
     {
         return Inertia::render('Index', [
-            'vehicles' => Vehicle::all()->sortBy('id'),
+            'types' => VehicleTypes::values(),
+            'brands' => VehicleBrands::values(),
+            'vehicles' => $builder->all(),
           ]);
     }
 
-    public function store(VehicleRequest $request): void
+    public function store(VehicleRequest $request, VehiclesWriterInterface $writer): void
     {
         $data = $request->validated();
 
-        $this->vehicleRepository->add($data);
+        $writer->create($data);
     }
 
-    public function update(VehicleRequest $request, Vehicle $vehicle): void
+    public function update(int $id, VehicleRequest $request, VehiclesWriterInterface $writer): void
     {
         $data = $request->validated();
 
-        $this->vehicleRepository->update($vehicle, $data);
+        $writer->update($id, $data);
     }
 
-    public function destroy(Vehicle $vehicle): void
+    public function destroy($id, VehicleDestroyerInterface $destroyer): void
     {
-        $this->vehicleRepository->destroy($vehicle);
+        $destroyer->destroy($id);
     }
 }
