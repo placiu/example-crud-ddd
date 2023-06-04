@@ -1,6 +1,6 @@
 <script setup>
     import { useForm } from '@inertiajs/vue3'
-  
+
     const form = useForm({
         make: null,
         model: null,
@@ -8,7 +8,7 @@
     })
 
     function add() {
-        form.post('/cars', {
+        form.post('/vehicles', {
             preserveScroll: true,
             onSuccess: () => form.reset(),
         });

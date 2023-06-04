@@ -5,7 +5,7 @@
     import FormEdit from './../Components/FormEdit.vue'
     import FormDelete from './../Components/FormDelete.vue'
 
-    defineProps({ cars: Object })
+    defineProps({ vehicles: Object })
 
     function licenceNumberFormatted(licenceNumber) {
         return licenceNumber.toUpperCase();
@@ -14,7 +14,7 @@
     function dateFormatted(date) {
         const timestamp = Date.parse(date);
         const dateObject = new Date(timestamp);
-        
+
         const year = dateObject.getFullYear();
         const month = String(dateObject.getMonth() + 1).padStart(2, '0');;
         const day = String(dateObject.getDay()).padStart(2, '0');
@@ -32,7 +32,7 @@
                 Add
             </template>
             <template v-slot:dialog-title>
-                Add New Car
+                Add New Vehicle
             </template>
             <template v-slot:dialog-content>
                 <FormAdd />
@@ -66,24 +66,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="car in cars" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" :key="car.id">
+                    <tr v-for="vehicle in vehicles" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" :key="vehicle.id">
                         <td class="px-6 py-4">
-                            {{ car.id }}
+                            {{ vehicle.id }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ licenceNumberFormatted(car.licence_number) }}
+                            {{ licenceNumberFormatted(vehicle.licence_number) }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ car.make }}
+                            {{ vehicle.make }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ car.model }}
+                            {{ vehicle.model }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ dateFormatted(car.created_at) }}
+                            {{ dateFormatted(vehicle.created_at) }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ dateFormatted(car.updated_at) }}
+                            {{ dateFormatted(vehicle.updated_at) }}
                         </td>
                         <td class="flex gap-2 justify-center px-6 py-4">
                             <Dialog>
@@ -91,10 +91,10 @@
                                     Edit
                                 </template>
                                 <template v-slot:dialog-title>
-                                    Edit Car
+                                    Edit Vehicle
                                 </template>
                                 <template v-slot:dialog-content>
-                                    <FormEdit :car="car"/>
+                                    <FormEdit :vehicle="vehicle"/>
                                 </template>
                             </Dialog>
                             <Dialog>
@@ -102,10 +102,10 @@
                                     Delete
                                 </template>
                                 <template v-slot:dialog-title>
-                                    Delete Car
+                                    Delete Vehicle
                                 </template>
                                 <template v-slot:dialog-content>
-                                    <FormDelete :car="car"/>
+                                    <FormDelete :vehicle="vehicle"/>
                                 </template>
                             </Dialog>
                         </td>

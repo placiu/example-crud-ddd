@@ -1,6 +1,6 @@
 <?php
 
-namespace Domains\Cars\Controllers;
+namespace Domains\Vehicles\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;

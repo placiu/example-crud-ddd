@@ -1,11 +1,11 @@
 <?php
 
-namespace Domains\Cars\Models;
+namespace Domains\Vehicles\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Car extends Model
+class Vehicle extends Model
 {
     use HasFactory;
 

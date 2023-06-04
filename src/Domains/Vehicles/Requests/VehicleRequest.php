@@ -1,10 +1,10 @@
 <?php
 
-namespace Domains\Cars\Requests;
+namespace Domains\Vehicles\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CarRequest extends FormRequest
+class VehicleRequest extends FormRequest
 {
     public function authorize(): bool
     {

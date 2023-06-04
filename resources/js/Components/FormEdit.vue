@@ -2,17 +2,17 @@
 import { useForm } from '@inertiajs/vue3'
 
     const props = defineProps({
-        car: Object,
+        vehicle: Object,
     })
-    
+
     const form = useForm({
-        make: props.car.make,
-        model: props.car.model,
-        licence_number: props.car.licence_number,
+        make: props.vehicle.make,
+        model: props.vehicle.model,
+        licence_number: props.vehicle.licence_number,
     })
 
     function update() {
-        form.put('/cars/' + props.car.id, {
+        form.put('/vehicles/' + props.vehicle.id, {
             preserveScroll: true,
         });
     }

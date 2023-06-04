@@ -2,11 +2,11 @@
 import { router } from '@inertiajs/vue3'
 
     const props = defineProps({
-        car: Object,
+        vehicle: Object,
     })
 
     function destroy() {
-        router.delete('/cars/' + props.car.id);
+        router.delete('/vehicles/' + props.vehicle.id);
     }
 </script>
 
