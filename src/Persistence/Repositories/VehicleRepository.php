@@ -2,44 +2,53 @@
 
 namespace Persistence\Repositories;
 
-use App\Models\Vehicle;
+use App\Models\Vehicle as VehicleModel;
+use Domains\Vehicles\Entities\Vehicle as VehicleEntity;
+use Domains\Vehicles\Factories\VehicleFactory;
 use Domains\Vehicles\Repositories\VehicleRepositoryInterface;
 
 class VehicleRepository implements VehicleRepositoryInterface
 {
     public function index(): array
     {
-        $vehicles = Vehicle::all();
+        $vehicleModels = VehicleModel::all();
+        $vehicleModels->map(function(VehicleModel $vehicleModel) {
+            return VehicleFactory::fromData($vehicleModel->toArray());
+        });
 
-        return $vehicles->toArray();
+        return $vehicleModels->all();
     }
 
-    public function show(int $id): object
+    public function show(int $id): VehicleEntity
     {
-        return Vehicle::find($id);
+        $vehicleModel = VehicleModel::find($id);
+
+        return VehicleFactory::fromData($vehicleModel->toArray());
     }
 
-    public function create(array $data): Vehicle
+    public function create(array $data): VehicleEntity
     {
-        return Vehicle::create($data);
+        $vehicleModel = VehicleModel::create($data);
+
+        return VehicleFactory::fromData($vehicleModel->toArray());
     }
 
-    public function update(int $id, array $data): object
+    public function update(int $id, array $data): VehicleEntity
     {
-        $vehicle = Vehicle::find($id);
+        $vehicleModel = VehicleModel::find($id);
 
-        $vehicle->type = $data['type'];
-        $vehicle->brand = $data['brand'];
-        $vehicle->model = $data['model'];
-        $vehicle->licence_number = $data['licence_number'];
-        $vehicle->save();
+        $vehicleModel->type = $data['type'];
+        $vehicleModel->brand = $data['brand'];
+        $vehicleModel->model = $data['model'];
+        $vehicleModel->licence_number = $data['licence_number'];
+        $vehicleModel->save();
 
-        return $vehicle;
+        return VehicleFactory::fromData($vehicleModel->toArray());
     }
 
     public function destroy(int $id): void
     {
-        $vehicle = Vehicle::find($id);
+        $vehicle = VehicleModel::find($id);
 
         $vehicle->delete();
     }
